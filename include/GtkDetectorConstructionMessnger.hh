@@ -3,10 +3,13 @@
 #include "G4UImessenger.hh" 
 #include "G4UIcmdWithADoubleAndUnit.hh"
 #include "G4UIcmdWithoutParameter.hh"
+#include "G4UIcmdWithAString.hh"
 #include "G4UImanager.hh"
 
 #include "globals.hh"
 #include "G4String.hh"
+
+#include "iostream"
 
 class G4ParticleGun; 
 class G4ParticleTable; 
@@ -34,6 +37,9 @@ class GtkDetectorConstructionMessenger:public G4UImessenger{
     G4UIcmdWithADoubleAndUnit* SetPMMAThicknessCmd;
     G4UIcmdWithADoubleAndUnit* SetSiPDEdgeCmd;
     G4UIcmdWithoutParameter* HellowWorldCmd;
+    G4UIcmdWithAString* ConstructFromFileCmd;
+
+    void ConstructFromFile(string fileName);
 
 };
 
