@@ -30,6 +30,7 @@ GtkDetectorConstruction::GtkDetectorConstruction()
   photodiodeEdge = 0.26*cm;
   SiPD_pv = NULL;
   fDCM = new GtkDetectorConstructionMessenger(this);
+  tgrMessager = new G4tgrMessenger;
 
 }
 
@@ -38,6 +39,7 @@ GtkDetectorConstruction::GtkDetectorConstruction()
 GtkDetectorConstruction::~GtkDetectorConstruction()
 { 
   delete fDCM;
+  delete tgrMessager;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -80,11 +82,16 @@ G4VPhysicalVolume* GtkDetectorConstruction::Construct()
   ConstructSiPD();
   //----------------------------------------------------------------------
   
-  
+  //ascii-----------------------------------------------------------------
+  G4String filename = "g4geom_simple.txt";
+  G4tgbVolumeMgr* volmgr = G4tgbVolumeMgr::GetInstance(); 
+  volmgr->AddTextFile(filename);
+  G4VPhysicalVolume* physiWorld = volmgr->ReadAndConstructDetector();
 
 
 
-  return physWorld;
+
+  return physiWorld;
 }
 
 G4Material* GtkDetectorConstruction::FindMaterial(G4String name) {

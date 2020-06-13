@@ -88,7 +88,7 @@
 
 /vis/geometry/set/colour PCB_lv 0 0.39 0.84 0.156 1.0
 /vis/geometry/set/colour SHELL1_lv 0 0.89 0.79 0.0 1.0
-/vis/geometry/set/colour SiPD_lv 0 0.1 0.1 0.1 1.0
+/vis/geometry/set/colour SiPD_lv 0 0.9 0.9 0.9 1.0
 /vis/geometry/set/colour SHELL2_lv 0 0.89 0.79 0.0 1.0
 /vis/geometry/set/colour PMMA_lv 0 0.93 0.93 0.93 0.5
 

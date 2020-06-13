@@ -40,12 +40,19 @@
 #include <map>
 #include "GtkDetectorConstructionMessnger.hh"
 
+//Consrtuct from ascii txt file.
+#include "G4tgbVolumeMgr.hh" 
+#include "G4tgrMessenger.hh"
+
+
 using namespace std;
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
 class GtkMaterials;
 class G4VisAttributes;
+class G4tgbVolumeMgr;
+class G4tgrMessenger;
 
 
 
@@ -83,6 +90,9 @@ class GtkDetectorConstruction : public G4VUserDetectorConstruction
 
     //Messenager
     GtkDetectorConstructionMessenger* fDCM;
+
+    //ascii construction
+    G4tgrMessenger* tgrMessager;
 
 
 

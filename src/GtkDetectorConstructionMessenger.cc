@@ -146,6 +146,21 @@ void GtkDetectorConstructionMessenger::ConstructFromFile(string fileName){
             material = sv[i];
             i++;
         }
+
+        
+        if(type == "box"){
+            
+
+
+
+
+
+
+
+
+        }
+
+
     }
 
     

@@ -8,6 +8,7 @@
 
 #include "globals.hh"
 #include "G4String.hh"
+#include "string"
 
 #include "iostream"
 
@@ -22,6 +23,8 @@ class G4UIcmdWith3Vector;
 class G4UIcmdWith3VectorAndUnit;
 class G4string;
 class GtkDetectorConstruction;
+
+using namespace std;
 
 class GtkDetectorConstructionMessenger:public G4UImessenger{
     public:
@@ -39,7 +42,7 @@ class GtkDetectorConstructionMessenger:public G4UImessenger{
     G4UIcmdWithoutParameter* HellowWorldCmd;
     G4UIcmdWithAString* ConstructFromFileCmd;
 
-    void ConstructFromFile(string fileName);
+    void ConstructFromFile(std::string);
 
 };
 

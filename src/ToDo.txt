@@ -1,0 +1,1 @@
+How ascii construction cooperate with cpp code construction?
