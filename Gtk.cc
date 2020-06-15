@@ -60,6 +60,9 @@ int main(int argc,char** argv)
 
   // Set mandatory initialization classes
   //
+  
+
+
   // Detector construction
   runManager->SetUserInitialization(new GtkDetectorConstruction());
 

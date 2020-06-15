@@ -52,8 +52,10 @@ void GtkDetectorConstructionMessenger::SetNewValue(G4UIcommand * command,G4Strin
 
     if(command==ReInitializeGeometryCmd){
         G4cout<<"reinitializing geometry ...";
-        G4RunManager::GetRunManager()->ReinitializeGeometry();
-        G4UImanager::GetUIpointer()->ApplyCommand("/control/execute vis.mac")
+        //delete fDetectorConstruction->physAscWorld;
+        G4tgbVolumeMgr::GetInstance()->DumpSummary();
+        G4RunManager::GetRunManager()->ReinitializeGeometry(true);
+        //G4UImanager::GetUIpointer()->ApplyCommand("/control/execute vis.mac");
         G4cout<<" complete!"<<G4endl;
         
     }

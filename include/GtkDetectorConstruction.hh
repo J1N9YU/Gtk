@@ -42,7 +42,7 @@
 
 //Consrtuct from ascii txt file.
 #include "G4tgbVolumeMgr.hh" 
-#include "G4tgrMessenger.hh"
+
 
 
 using namespace std;
@@ -52,7 +52,6 @@ class G4LogicalVolume;
 class GtkMaterials;
 class G4VisAttributes;
 class G4tgbVolumeMgr;
-class G4tgrMessenger;
 
 
 
@@ -75,25 +74,19 @@ class GtkDetectorConstruction : public G4VUserDetectorConstruction
     void ConstructSiPD();
     void ImportAsciimodels(string dir = "../ascii_models");
 
-  
-    
+
+    G4VPhysicalVolume* physAscWorld;
 
   protected:
     GtkMaterials* fMaterials;
     G4Cache<GtkPhotonDetSD*> fmppcSD;
-
-    //Parameters
-    G4double photodiodeEdge;
     
-    //Vloumes
-    G4LogicalVolume* logicWorld;
-    G4VPhysicalVolume* SiPD_pv;
 
     //Messenager
     GtkDetectorConstructionMessenger* fDCM;
 
     //ascii construction
-    G4tgrMessenger* tgrMessager;
+    G4tgbVolumeMgr* volmgr ;
 
 
 
