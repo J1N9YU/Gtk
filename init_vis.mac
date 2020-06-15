@@ -14,6 +14,8 @@
 # Initialize kernel
 /run/initialize
 
+#Create a viewer
+/vis/open OGL 600x600-0+0
 
 # Visualization setting
 /control/execute vis.mac

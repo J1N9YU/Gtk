@@ -73,7 +73,8 @@ class GtkDetectorConstruction : public G4VUserDetectorConstruction
 
     //building geometry 
     void ConstructSiPD();
-    void ConstructFromFile(string fileName);
+    void ImportAsciimodels(string dir = "../ascii_models");
+
   
     
 

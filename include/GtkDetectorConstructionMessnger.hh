@@ -5,6 +5,8 @@
 #include "G4UIcmdWithoutParameter.hh"
 #include "G4UIcmdWithAString.hh"
 #include "G4UImanager.hh"
+#include "G4RunManager.hh"
+#include "G4UImanager.hh"
 
 #include "globals.hh"
 #include "G4String.hh"
@@ -23,6 +25,8 @@ class G4UIcmdWith3Vector;
 class G4UIcmdWith3VectorAndUnit;
 class G4string;
 class GtkDetectorConstruction;
+class G4RunManager;
+class G4UImanager;
 
 using namespace std;
 
@@ -39,7 +43,7 @@ class GtkDetectorConstructionMessenger:public G4UImessenger{
     G4UIdirectory* directory;
     G4UIcmdWithADoubleAndUnit* SetPMMAThicknessCmd;
     G4UIcmdWithADoubleAndUnit* SetSiPDEdgeCmd;
-    G4UIcmdWithoutParameter* HellowWorldCmd;
+    G4UIcmdWithoutParameter* ReInitializeGeometryCmd;
     G4UIcmdWithAString* ConstructFromFileCmd;
 
     void ConstructFromFile(std::string);

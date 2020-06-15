@@ -48,7 +48,7 @@ G4VPhysicalVolume* GtkDetectorConstruction::Construct()
 {    
   //----------------------------------------------------------------------    
   // World
-  
+  G4cout<<"Construct() is called"<<G4endl;
   G4VPhysicalVolume* physWorld;
 
   {
@@ -83,15 +83,15 @@ G4VPhysicalVolume* GtkDetectorConstruction::Construct()
   //----------------------------------------------------------------------
   
   //ascii-----------------------------------------------------------------
-  G4String filename = "g4geom_simple.txt";
   G4tgbVolumeMgr* volmgr = G4tgbVolumeMgr::GetInstance(); 
-  volmgr->AddTextFile(filename);
+  volmgr->AddTextFile("../ascii_models/g4geom_simple.txt");
   G4VPhysicalVolume* physiWorld = volmgr->ReadAndConstructDetector();
-
-
-
-
   return physiWorld;
+
+
+
+
+  return physWorld;
 }
 
 G4Material* GtkDetectorConstruction::FindMaterial(G4String name) {
@@ -138,6 +138,10 @@ void GtkDetectorConstruction::ConstructSiPD(){
                     0,                       //copy number
                     false);          //overlaps checking
 
+
+}
+
+void GtkDetectorConstruction::ImportAsciimodels(string dir){
 
 }
 

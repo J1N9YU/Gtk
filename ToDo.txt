@@ -1,0 +1,5 @@
+How ascii construction cooperate with cpp code construction?
+Adding optical porperties to material build by ascii file?
+feature: add all ascii file in a given diretory.
+- inherit G4rgbVolumeMgr to provide more disred function
+ReInitializeGeometry() or GeometryHasBeenModified() ?
