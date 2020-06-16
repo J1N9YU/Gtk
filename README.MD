@@ -4,4 +4,3 @@ which will include:
 2. Commands for Geant4 interactive session to build geometry conveniently and dynamically.
 3. Codes to write hit information to root file for off-line analysis.
 
-note: geant4 has provide constrction from ascii
