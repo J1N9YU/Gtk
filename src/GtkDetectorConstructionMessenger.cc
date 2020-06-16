@@ -22,6 +22,8 @@ GtkDetectorConstructionMessenger::GtkDetectorConstructionMessenger(GtkDetectorCo
 
     ReInitializeGeometryCmd = new G4UIcmdWithoutParameter("/Construction/ReInitializeGeometry",this);
 
+    ClearCmd = new G4UIcmdWithoutParameter("/Construction/Clear",this);
+
     ConstructFromFileCmd = new G4UIcmdWithAString("/Construction/ConstructFromFile",this);
     ConstructFromFileCmd->SetGuidance("Add a detector component according to a txt file");
     ConstructFromFileCmd->SetParameterName("File name",true,true);
@@ -46,18 +48,26 @@ void GtkDetectorConstructionMessenger::SetNewValue(G4UIcommand * command,G4Strin
 
     if(command==SetSiPDEdgeCmd){
         /*
-        fDetectorConstruction->SetphotodiodeEdge(SetSiPDEdgeCmd->GetNewDoubleValue(newValues));
+        fDetectorConstruction->SetphotodiodeEdge(SetSiPDEdgeCmd->GetNewDoubleValue(newValues));./G  
         */
     }
 
     if(command==ReInitializeGeometryCmd){
         G4cout<<"reinitializing geometry ...";
         //delete fDetectorConstruction->physAscWorld;
-        G4tgbVolumeMgr::GetInstance()->DumpSummary();
-        G4RunManager::GetRunManager()->ReinitializeGeometry(true);
+        
+        //G4RunManager::GetRunManager()->ReinitializeGeometry(true);
+        fDetectorConstruction->ConstrcutAsciimodels();
+        G4RunManager::GetRunManager()->GeometryHasBeenModified();
         //G4UImanager::GetUIpointer()->ApplyCommand("/control/execute vis.mac");
         G4cout<<" complete!"<<G4endl;
         
+    }
+
+    if(command == ClearCmd){
+        G4tgrRotationMatrixFactory::GetInstance()->DumpRotmList();
+        G4tgbVolumeMgr::GetInstance()->DumpSummary();
+        G4tgbVolumeMgr::GetInstance()->~G4tgbVolumeMgr();
     }
 
     if(command==ConstructFromFileCmd){

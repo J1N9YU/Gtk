@@ -8,6 +8,8 @@
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
 #include "G4tgbVolumeMgr.hh"
+#include "G4tgrRotationMatrixFactory.hh"
+#include "G4tgrFileReader.hh"
 
 #include "globals.hh"
 #include "G4String.hh"
@@ -29,6 +31,8 @@ class GtkDetectorConstruction;
 class G4RunManager;
 class G4UImanager;
 class G4tgbVolumeMgr;
+class G4tgrRotationMatrixFactory;
+class G4tgrFileReader;
 
 using namespace std;
 
@@ -47,6 +51,7 @@ class GtkDetectorConstructionMessenger:public G4UImessenger{
     G4UIcmdWithADoubleAndUnit* SetSiPDEdgeCmd;
     G4UIcmdWithoutParameter* ReInitializeGeometryCmd;
     G4UIcmdWithAString* ConstructFromFileCmd;
+    G4UIcmdWithoutParameter* ClearCmd;
 
     void ConstructFromFile(std::string);
 
