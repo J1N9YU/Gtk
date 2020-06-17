@@ -3,13 +3,13 @@
 
 //
 //
-#include "GtkPhotonDetHit.hh"
+#include "GtkHit.hh"
 
-G4ThreadLocal G4Allocator<GtkPhotonDetHit>* GtkPhotonDetHitAllocator=0;
+G4ThreadLocal G4Allocator<GtkHit>* GtkHitAllocator=0;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-GtkPhotonDetHit::GtkPhotonDetHit()
+GtkHit::GtkHit()
 {
   fArrivalTime = 0.;
   fPosArrive   = G4ThreeVector(0., 0., 0.);
@@ -18,7 +18,7 @@ GtkPhotonDetHit::GtkPhotonDetHit()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-GtkPhotonDetHit::GtkPhotonDetHit(G4ThreeVector pExit,
+GtkHit::GtkHit(G4ThreeVector pExit,
                                  G4ThreeVector pArrive,
                                  G4double pTime)
 {
@@ -29,11 +29,11 @@ GtkPhotonDetHit::GtkPhotonDetHit(G4ThreeVector pExit,
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-GtkPhotonDetHit::~GtkPhotonDetHit() { }
+GtkHit::~GtkHit() { }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-GtkPhotonDetHit::GtkPhotonDetHit(const GtkPhotonDetHit &right)
+GtkHit::GtkHit(const GtkHit &right)
   : G4VHit()
 {
   *this = right;
@@ -41,7 +41,7 @@ GtkPhotonDetHit::GtkPhotonDetHit(const GtkPhotonDetHit &right)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-const GtkPhotonDetHit& GtkPhotonDetHit::operator=(const GtkPhotonDetHit &right)
+const GtkHit& GtkHit::operator=(const GtkHit &right)
 {
   fPosExit     = right.fPosExit;
   fPosArrive   = right.fPosArrive;
@@ -52,7 +52,7 @@ const GtkPhotonDetHit& GtkPhotonDetHit::operator=(const GtkPhotonDetHit &right)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-G4bool GtkPhotonDetHit::operator==(const GtkPhotonDetHit& right) const
+G4bool GtkHit::operator==(const GtkHit& right) const
 {
   return fPosExit     == right.fPosExit    &&
          fPosArrive   == right.fPosArrive  &&

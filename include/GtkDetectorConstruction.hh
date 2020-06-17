@@ -33,7 +33,7 @@
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
 #include "GtkMaterials.hh"
-#include "GtkPhotonDetHit.hh"
+#include "GtkHit.hh"
 #include "G4Cache.hh"
 #include "GtkPhotonDetSD.hh"
 #include "G4VisAttributes.hh"
