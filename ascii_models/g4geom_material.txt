@@ -1,0 +1,10 @@
+// Define materials
+:ELEM Hydrogen H 1. 1.
+:ELEM Oxygen O 8 16.
+:ELEM Nitrogen N 7 14.
+:MIXT Air 1.214E-03 2
+      Nitrogen   0.75
+      Oxygen     0.25
+
+
+

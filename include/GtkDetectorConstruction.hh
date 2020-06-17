@@ -40,9 +40,12 @@
 #include <map>
 #include "GtkDetectorConstructionMessnger.hh"
 
+
 //Consrtuct from ascii txt file.
 #include "G4tgbVolumeMgr.hh" 
-#include "G4tgrMessenger.hh"
+#include "G4tgrRotationMatrixFactory.hh"
+#include "G4tgrVolumeMgr.hh"
+
 
 
 using namespace std;
@@ -52,7 +55,8 @@ class G4LogicalVolume;
 class GtkMaterials;
 class G4VisAttributes;
 class G4tgbVolumeMgr;
-class G4tgrMessenger;
+class G4tgrVolumeMgr;
+class G4tgrRotationMatrixFactory;
 
 
 
@@ -73,26 +77,21 @@ class GtkDetectorConstruction : public G4VUserDetectorConstruction
 
     //building geometry 
     void ConstructSiPD();
-    void ConstructFromFile(string fileName);
-  
-    
+    void ConstrcutAsciimodels();
+
+
+    G4VPhysicalVolume* physAscWorld;
 
   protected:
     GtkMaterials* fMaterials;
     G4Cache<GtkPhotonDetSD*> fmppcSD;
-
-    //Parameters
-    G4double photodiodeEdge;
     
-    //Vloumes
-    G4LogicalVolume* logicWorld;
-    G4VPhysicalVolume* SiPD_pv;
 
     //Messenager
     GtkDetectorConstructionMessenger* fDCM;
 
     //ascii construction
-    G4tgrMessenger* tgrMessager;
+    G4tgbVolumeMgr* volmgr ;
 
 
 
