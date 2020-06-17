@@ -3,14 +3,23 @@
 
 
 // Define rotation matrix
-//:ROTM R00 90. 0. 90. 90. 0. 0.  // unit matrix
+:ROTM R00 90. 0. 90. 90. 0. 0.  // unit matrix
 
 // Define volumes and place them
 :VOLU world BOX 60. 30. 30. G4_AIR
-:COLOUR world 0.5 0.5 0.5 0.5
+:COLOUR world 0.9 0.9 0.9 0.2
 
-//:VOLU "my tube" TUBS 0. 10. 15. 0. 360. G4_WATER
-//:PLACE "my tube" 1 world R00 0. 0. $POSZ
+:VOLU "plastic scintillator" BOX 40. 10. 10. G4_WATER
+:PLACE "plastic scintillator" 1 world R00 0. 0. 0
+:COLOUR "plastic scintillator" 0.9 0.9 0.9 0.7
+
+:VOLU "SiPM 1" BOX 1. 2. 2. G4_WATER
+:PLACE "SiPM 1" 1 world R00 -40. 0. 0
+:COLOUR "SiPM 1" 0.9 0.1 0.1 0.9
+
+:VOLU "SiPM 2" BOX 1. 2. 2. G4_WATER
+:PLACE "SiPM 2" 1 world R00 40. 0. 0
+:COLOUR "SiPM 2" 0.9 0.1 0.1 0.9
 
 //:VOLU sphere ORB 5.  G4_AIR
 //:PLACE sphere 1 "my tube" R00 0. 1. 10.

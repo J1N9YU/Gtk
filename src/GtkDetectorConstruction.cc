@@ -63,15 +63,7 @@ G4Material* GtkDetectorConstruction::FindMaterial(G4String name) {
 }
 
 void GtkDetectorConstruction::ConstructSDandField(){
-  /*
-    if (!fmppcSD.Get()) {
-     G4String mppcSDName = "GeppFac/PhotonDet";
-     GtkPhotonDetSD* mppcSD = new GtkPhotonDetSD(mppcSDName);
-     G4SDManager::GetSDMpointer()->AddNewDetector(mppcSD);
-     fmppcSD.Put(mppcSD);
-  }
-  SetSensitiveDetector("SiPD_lv", fmppcSD.Get(), true);
-  */
+  
 }
 
 
