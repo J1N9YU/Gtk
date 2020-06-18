@@ -39,8 +39,7 @@
 #include "G4VisAttributes.hh"
 #include <map>
 #include "GtkDetectorConstructionMessnger.hh"
-#include "secScintSD.hh"
-#include "secScintHit.hh"
+
 
 
 //Consrtuct from ascii txt file.

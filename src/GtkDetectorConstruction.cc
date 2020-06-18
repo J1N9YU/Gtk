@@ -1,6 +1,7 @@
 
 
 #include "GtkDetectorConstruction.hh"
+#include "GtkScintArraySD.hh"
 
 #include "G4RunManager.hh"
 #include "G4NistManager.hh"
@@ -63,6 +64,10 @@ G4Material* GtkDetectorConstruction::FindMaterial(G4String name) {
 }
 
 void GtkDetectorConstruction::ConstructSDandField(){
+  /*
+  auto SDArray = new GtkScintArraySD("GtkSD/Scintillator_array");
+  SetSensitiveDetector("scintlv",SDArray);
+  */
   
 }
 
