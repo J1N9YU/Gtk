@@ -1,4 +1,4 @@
-
+//#define USE_GNERERAL_SOURCE
 
 #include "GtkPrimaryGeneratorAction.hh"
 
@@ -50,7 +50,7 @@ GtkPrimaryGeneratorAction::~GtkPrimaryGeneratorAction()
 void GtkPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
   //--------------------photon source---------------------------
-  /*
+  
   if(!isTestMode){
     fParticleGun->SetParticleMomentumDirection(GetRandomDirection());
     fParticleGun->SetParticlePosition(GetRandomPosition());
@@ -59,10 +59,16 @@ void GtkPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     fParticleGun->SetParticlePosition(GetSpecificPosition());
   }
   SetRandomOptPhotonPolar();
-  fParticleGun->GeneratePrimaryVertex(anEvent);
-  *//*----------------------------------------------------------*/
+  
+  /*----------------------------------------------------------*/
 
+#if USE_GENERAL_SOURCE
   fparticleSource->GeneratePrimaryVertex(anEvent);
+#else
+  fParticleGun->GeneratePrimaryVertex(anEvent);
+#endif
+
+  
 
 }
 
@@ -71,10 +77,11 @@ G4ThreeVector GtkPrimaryGeneratorAction::GetRandomDirection(){
   
 
   G4double theta = G4UniformRand()*2*CLHEP::pi;
-  G4double phi = CLHEP::pi-asin(G4UniformRand());                               //generate phi basing on lambert light source assumption
-  G4double x = cos(theta)*sin(phi);
+  G4double phi = (CLHEP::pi-asin(G4UniformRand()))*0.0;                               //generate phi basing on lambert light source assumption
+  G4double x = G4UniformRand()>0.5?1:-1;
   G4double z = sin(theta)*sin(phi);
-  G4double y = cos(phi);
+  G4double y = cos(theta)*sin(phi);
+  x = x*cos(phi);
   G4ThreeVector direction(x,y,z);
   return direction;
 }
@@ -89,7 +96,9 @@ G4ThreeVector GtkPrimaryGeneratorAction::GetRandomPosition(){
   G4double x = R*cos(theta);
   G4double z = R*sin(theta);
   G4double y = 0.36*cm;                        //altitude
-  return G4ThreeVector(x,y,z);
+  
+  return G4ThreeVector(0,0,0);
+  //return G4ThreeVector(x,y,z);
 }
 
 G4ThreeVector GtkPrimaryGeneratorAction::GetSpecificDirection(){
