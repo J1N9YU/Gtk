@@ -10,6 +10,7 @@
 #include "globals.hh"
 
 #include"MyDataAnalysisHelper.hh"
+#include "G4GeneralParticleSource.hh"
 
 class G4ParticleGun;
 class G4Event;
@@ -42,6 +43,8 @@ class GtkPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   
   private:
     G4ParticleGun*  fParticleGun; // pointer a to G4 gun class
+    G4GeneralParticleSource* fparticleSource;
+    
     bool isTestMode;              // in test mode, particle gun shoot photon with specific positiong and direction instead of random generating them.
 
 

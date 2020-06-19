@@ -8,35 +8,37 @@
 #include "G4NistManager.hh"
 #include "GtkDetectorConstruction.hh"
 
+#include "map"
+#include "vector"
+
+using namespace std;
+
 class GtkMaterials
 {
   public:
 
     virtual ~GtkMaterials();
- 
     static GtkMaterials* GetInstance();
-
     G4Material* GetMaterial(const G4String);
  
   private:
  
     GtkMaterials();
-
     void CreateMaterials();
 
   private:
 
     static GtkMaterials* fInstance;
-
     G4NistManager*     fNistMan;
-
     G4Material*        fAir;
-
     G4Material*        fPMMA;
     G4Material*        fPCB;
     G4Material*        fMetal;
     G4Material*        fSiPD;
 
+    map<string,vector<G4double>> parV;
+    
+
 };
 
-#endif /*GtkMaterials_h*/
+#endif

@@ -16,10 +16,12 @@
 
 GtkPrimaryGeneratorAction::GtkPrimaryGeneratorAction()
 : G4VUserPrimaryGeneratorAction(),
-  fParticleGun(0)
+  fParticleGun(0),
+  fparticleSource(0)
 {
   G4int n_particle = 1;
   fParticleGun  = new G4ParticleGun(n_particle);
+  fparticleSource = new G4GeneralParticleSource;
 
   // default particle kinematic
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
@@ -47,7 +49,8 @@ GtkPrimaryGeneratorAction::~GtkPrimaryGeneratorAction()
 
 void GtkPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  //code for each inital event
+  //--------------------photon source---------------------------
+  /*
   if(!isTestMode){
     fParticleGun->SetParticleMomentumDirection(GetRandomDirection());
     fParticleGun->SetParticlePosition(GetRandomPosition());
@@ -55,12 +58,11 @@ void GtkPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     fParticleGun->SetParticleMomentumDirection(GetSpecificDirection());
     fParticleGun->SetParticlePosition(GetSpecificPosition());
   }
-
   SetRandomOptPhotonPolar();
-
-  
-
   fParticleGun->GeneratePrimaryVertex(anEvent);
+  *//*----------------------------------------------------------*/
+
+  fparticleSource->GeneratePrimaryVertex(anEvent);
 
 }
 
