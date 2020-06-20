@@ -9,7 +9,7 @@
 :VOLU world BOX 60. 30. 30. G4_AIR
 :COLOUR world 0.9 0.9 0.9 0.2
 
-:VOLU "plastic scintillator" BOX 40. 10. 10. G4_WATER
+:VOLU "plastic scintillator" BOX 40. 10. 10. Scintillator
 :PLACE "plastic scintillator" 1 world R00 0. 0. 0
 :COLOUR "plastic scintillator" 0.9 0.9 0.9 0.7
 

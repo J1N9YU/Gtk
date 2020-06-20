@@ -30,8 +30,6 @@ GtkDetectorConstruction::GtkDetectorConstruction()
   G4cout<<"detectorconstruction constructor is called"<<G4endl;
   fMaterials = GtkMaterials::GetInstance();
   fDCM = new GtkDetectorConstructionMessenger(this);
-  
-
 
 }
 
@@ -74,7 +72,7 @@ void GtkDetectorConstruction::ConstructSDandField(){
 
 void GtkDetectorConstruction::ConstrcutAsciimodels(){
   volmgr = G4tgbVolumeMgr::GetInstance();
-  volmgr->AddTextFile("../ascii_models/g4geom_simple.txt");
+  volmgr->AddTextFile("../ascii_modles/g4geom_simple.txt");
   physAscWorld = volmgr->ReadAndConstructDetector();
 }
 

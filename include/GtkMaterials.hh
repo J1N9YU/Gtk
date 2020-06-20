@@ -20,6 +20,8 @@ class GtkMaterials
     virtual ~GtkMaterials();
     static GtkMaterials* GetInstance();
     G4Material* GetMaterial(const G4String);
+
+    void ReadTextFile(string fileName);
  
   private:
  
@@ -35,6 +37,7 @@ class GtkMaterials
     G4Material*        fPCB;
     G4Material*        fMetal;
     G4Material*        fSiPD;
+    G4Material*        fScintillator;
 
     map<string,vector<G4double>> parV;
     

@@ -23,6 +23,8 @@ GtkDetectorConstructionMessenger::GtkDetectorConstructionMessenger(GtkDetectorCo
     ReInitializeGeometryCmd = new G4UIcmdWithoutParameter("/Construction/ReInitializeGeometry",this);
 
     ClearCmd = new G4UIcmdWithoutParameter("/Construction/Clear",this);
+    
+    TestCmd = new G4UIcmdWithoutParameter("/Construction/Test",this);
 
     ConstructFromFileCmd = new G4UIcmdWithAString("/Construction/ConstructFromFile",this);
     ConstructFromFileCmd->SetGuidance("Add a detector component according to a txt file");
@@ -68,6 +70,12 @@ void GtkDetectorConstructionMessenger::SetNewValue(G4UIcommand * command,G4Strin
         G4tgrRotationMatrixFactory::GetInstance()->DumpRotmList();
         G4tgbVolumeMgr::GetInstance()->DumpSummary();
         G4tgbVolumeMgr::GetInstance()->~G4tgbVolumeMgr();
+    }
+
+    if(command == TestCmd){
+        GtkMaterials::GetInstance()->ReadTextFile("../Property Data/scintABSEnergy.txt");
+
+
     }
 
     if(command==ConstructFromFileCmd){

@@ -1,4 +1,4 @@
-//#define USE_GNERERAL_SOURCE
+#define USE_GNERERAL_SOURCE
 
 #include "GtkPrimaryGeneratorAction.hh"
 
@@ -62,7 +62,7 @@ void GtkPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   
   /*----------------------------------------------------------*/
 
-#if USE_GENERAL_SOURCE
+#ifdef USE_GNERERAL_SOURCE
   fparticleSource->GeneratePrimaryVertex(anEvent);
 #else
   fParticleGun->GeneratePrimaryVertex(anEvent);
