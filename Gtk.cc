@@ -86,7 +86,7 @@ int main(int argc,char** argv)
   // Get the pointer to the User Interface manager
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
 
-  runManager->SetVerboseLevel(0);
+  runManager->SetVerboseLevel(2);
   if(!ui)runManager->Initialize();
   
 

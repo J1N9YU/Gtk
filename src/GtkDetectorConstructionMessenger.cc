@@ -73,7 +73,7 @@ void GtkDetectorConstructionMessenger::SetNewValue(G4UIcommand * command,G4Strin
     }
 
     if(command == TestCmd){
-        //GtkMaterials::GetInstance()->ScanFolder("../Property Data/");
+        //GtkMaterials::GetInstance()->ImportPorpertyFromFolder("../Property Data/");
         GtkMaterials::GetInstance()->ReadTextFile("../Property Data/scintFastComponent.txt");
 
 

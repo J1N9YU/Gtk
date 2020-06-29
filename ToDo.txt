@@ -3,4 +3,5 @@
 - ascii model reimport bugs
 * building material from ascii (using tgb line processer as refernce)
 * import spectrums from ascii ( custom way )
-    * Modify GtkMaterial::ReadTextFile() so that is can read text file containing x y pairs.
+    * translate G4propertiesvector to material property table ( design ascii format)( maybe still using custom line processor )
+    

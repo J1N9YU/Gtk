@@ -16,7 +16,7 @@ GtkMaterials::GtkMaterials()
   fNistMan->SetVerbose(2);
 
   CreateMaterials();
-  //ImportPorpertyFromFolder("../Property Data/");
+  ImportPorpertyFromFolder("../Property Data/");
 
   fInstance = 0;
 }
@@ -298,7 +298,7 @@ void GtkMaterials::CreateMaterials()
 
 }
 
-
+//Transport data from text file to class property
 void GtkMaterials::ReadTextFile(string fileName){
   ifstream file(fileName);
   if(!file.is_open()){
@@ -315,6 +315,7 @@ void GtkMaterials::ReadTextFile(string fileName){
   file>>parName>>unit>>entries;
   string s;
   getline(file,s);
+
   
 
   //Read all following lines
@@ -348,6 +349,51 @@ void GtkMaterials::ReadTextFile(string fileName){
 
 }
 
+void GtkMaterials::ReadVecTextFile(string fileName){
+    ifstream file(fileName);
+  if(!file.is_open()){
+    cout<<"Text not found!"<<endl;  
+    return;
+  }
+  
+  string theLine;
+  getline(file,theLine);
+  istringstream ss(theLine);
+  string name,xUnit,yUnit;
+  ss>>name>>xUnit>>yUnit;
+  getline(file,theLine);
+  vector<G4double> xv;
+  vector<G4double> yv;
+  while(getline(file,theLine)){
+    //validation
+
+    //read
+    int pos = theLine.find(' ');
+    G4double x = stod(theLine.substr(0,pos));
+    G4double y = stod(theLine.substr(pos+1,theLine.size()-pos-1));
+    xv.push_back(x);
+    yv.push_back(y);
+
+
+  }
+
+  G4MaterialPropertyVector pv(&xv[0],&yv[0],xv.size());
+  G4cout<<"dumping vector values"<<G4endl;
+  pv.DumpValues();
+
+  if(thePairs.find(name)==thePairs.end()){
+    thePairs[name] = pv;
+  }
+  else{
+    cout<<"Repeated pair name, skip this pair"<<endl;
+  }
+  
+
+}
+
+
+
+
 void GtkMaterials::AddPropertyToMaterial(G4Material* mat,string propertyName,string vecName1,string vecName2){
   auto pt = mat->GetMaterialPropertiesTable();
   if(pt == NULL){
@@ -366,6 +412,8 @@ void GtkMaterials::AddPropertyToMaterial(G4Material* mat,string propertyName,str
 
 }
 
+
+
 //Scan the folder and do something.
 void GtkMaterials::ImportPorpertyFromFolder(string path){
   vector<string> fileNames;
@@ -380,6 +428,11 @@ void GtkMaterials::ImportPorpertyFromFolder(string path){
       fileNames.push_back(name);
       cout<<"Reading text file: "<<path+name<<endl;
       ReadTextFile(path+name);
+    }
+    else if(name.find("vec")!=string::npos){
+      fileNames.push_back(name);
+      cout<<"Reading pair text file: "<<path+name<<endl;
+      ReadVecTextFile(path+name);
     }
     if(--maxFileNum<0)break;
   }

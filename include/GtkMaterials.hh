@@ -22,7 +22,12 @@ class GtkMaterials
     static GtkMaterials* GetInstance();
     G4Material* GetMaterial(const G4String);
 
+    //Single vector
     void ReadTextFile(string fileName);
+
+    //x y pair vector
+    void ReadVecTextFile(string fileName);
+
     void AddPropertyToMaterial(G4Material* mat,string propertyName,string vecName1,string vecName2);
     void ImportPorpertyFromFolder(string path);
 
@@ -43,11 +48,12 @@ class GtkMaterials
     G4Material*        fSiPD;
     G4Material*        fScintillator;
 
+    map<string,G4MaterialPropertyVector> thePairs;
+    
     map<string,vector<G4double>> parV;
     
 
 };
 
-class Spec
 
 #endif

@@ -27,13 +27,9 @@
 GtkDetectorConstruction::GtkDetectorConstruction()
 : G4VUserDetectorConstruction()
 {
-  G4cout<<"detectorconstruction constructor is called"<<G4endl;
   volmgr = G4tgbVolumeMgr::GetInstance();
 
-  //Chose Gtk detector builder inorder to invoke Gtk LineProcessor
-  cout<<"setting custom line processor"<<endl;
-  GtktgbDetectorBuilder* gtb = new GtktgbDetectorBuilder;
-  volmgr->SetDetectorBuilder(gtb);
+
 
   //Material helper class
   fMaterials = GtkMaterials::GetInstance();
@@ -86,7 +82,10 @@ void GtkDetectorConstruction::ConstrcutAsciimodels(){
   //impoty ascii modles
   volmgr->AddTextFile("../ascii_modles/g4geom_simple.txt");
 
-
+  //Chose Gtk detector builder inorder to invoke Gtk LineProcessor
+  cout<<"setting custom line processor"<<endl;
+  GtktgbDetectorBuilder* gtb = new GtktgbDetectorBuilder;
+  volmgr->SetDetectorBuilder(gtb);
   
 
   physAscWorld = volmgr->ReadAndConstructDetector();
