@@ -11,8 +11,9 @@ GtktgrLineProcessor::~GtktgrLineProcessor(){
 }
 
 G4bool GtktgrLineProcessor::ProcessLine(const std::vector<G4String> wl){
-
+    cout<<"process line starts"<<endl;
     G4bool iret = G4tgrLineProcessor::ProcessLine(wl);
+    cout<<"default processing finish"<<endl;
 
     G4String wl0 = wl[0];
     for(size_t ii = 0;ii<wl0.length();ii++){
@@ -22,6 +23,7 @@ G4bool GtktgrLineProcessor::ProcessLine(const std::vector<G4String> wl){
     if(!iret){
 
         if(wl0 == ":PROPERTY"){
+            cout<<"??"<<wl0<<endl;
             auto iter = wl.begin()+1;
             vector<G4String> wlc;
             for(;iter!=wl.end();iter++){

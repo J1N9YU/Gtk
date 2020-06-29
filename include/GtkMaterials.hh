@@ -7,6 +7,7 @@
 #include "G4Material.hh"
 #include "G4NistManager.hh"
 #include "GtkDetectorConstruction.hh"
+#include "G4MaterialPropertyVector.hh"
 
 #include "map"
 #include "vector"
@@ -46,5 +47,7 @@ class GtkMaterials
     
 
 };
+
+class Spec
 
 #endif

@@ -305,6 +305,7 @@ void GtkMaterials::ReadTextFile(string fileName){
     G4cout<<"Text not found!"<<G4endl;  
     return;
   }
+  
 
   //Read the first line
   string parName;
@@ -314,6 +315,7 @@ void GtkMaterials::ReadTextFile(string fileName){
   file>>parName>>unit>>entries;
   string s;
   getline(file,s);
+  
 
   //Read all following lines
   while(getline(file,s)){
@@ -364,6 +366,7 @@ void GtkMaterials::AddPropertyToMaterial(G4Material* mat,string propertyName,str
 
 }
 
+//Scan the folder and do something.
 void GtkMaterials::ImportPorpertyFromFolder(string path){
   vector<string> fileNames;
   DIR* dir;
