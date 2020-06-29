@@ -1,7 +1,9 @@
 
 #include "GtkMaterials.hh"
-
 #include "G4SystemOfUnits.hh"
+#include "dirent.h"
+//#include "regex"
+
 
 using namespace std;
 
@@ -14,6 +16,7 @@ GtkMaterials::GtkMaterials()
   fNistMan->SetVerbose(2);
 
   CreateMaterials();
+  //ImportPorpertyFromFolder("../Property Data/");
 
   fInstance = 0;
 }
@@ -295,12 +298,15 @@ void GtkMaterials::CreateMaterials()
 
 }
 
+
 void GtkMaterials::ReadTextFile(string fileName){
   ifstream file(fileName);
   if(!file.is_open()){
     G4cout<<"Text not found!"<<G4endl;  
     return;
   }
+
+  //Read the first line
   string parName;
   string unit;
   int entries;
@@ -308,12 +314,29 @@ void GtkMaterials::ReadTextFile(string fileName){
   file>>parName>>unit>>entries;
   string s;
   getline(file,s);
+
+  //Read all following lines
   while(getline(file,s)){
-    //cout<<"s is"<<s<<endl;
+
+    //A navie checking 
+    if(s.size()<=1&&!isdigit(s[0]))continue;
+
+    //Check if s reperesents a number
+    //regex is not supported by my gcc version, these codes has not been tested.
+    /*
+    regex pattern("^[0-9.]");
+    
+    if(!regex_match(s,pattern)){
+      cout<<"Regex check failed, property file's format may be wrong!"<<endl;
+      continue;
+    }
+    */
+
     G4double num = stod(s);
     num*= 1; //handle unit here
     pv.push_back(num);
   }
+
   parV[parName] = pv;
 
   G4cout<<"parName: "<<parName<<G4endl;
@@ -321,4 +344,42 @@ void GtkMaterials::ReadTextFile(string fileName){
   G4cout<<"entries: "<<entries<<G4endl;
   G4cout<<"pv.size(): "<<parV[parName].size()<<G4endl;
 
+}
+
+void GtkMaterials::AddPropertyToMaterial(G4Material* mat,string propertyName,string vecName1,string vecName2){
+  auto pt = mat->GetMaterialPropertiesTable();
+  if(pt == NULL){
+    pt = new G4MaterialPropertiesTable;
+    mat->SetMaterialPropertiesTable(pt);
+  }
+  
+  //Checking validity
+  if(parV.count(vecName1)==0||parV.count(vecName2)==0||parV[vecName1].size()!=parV[vecName2].size()){
+    G4cout<<"vec not found or it's size dont match"<<G4endl;
+    return;
+  }
+  
+  //Add porperty
+  pt->AddProperty(propertyName.c_str(),&parV[vecName1][0],&parV[vecName2][0],parV[vecName1].size());
+
+}
+
+void GtkMaterials::ImportPorpertyFromFolder(string path){
+  vector<string> fileNames;
+  DIR* dir;
+  dirent* ptr;
+  dir = opendir(path.c_str());
+  int maxFileNum = 100;
+  while((ptr = readdir(dir)) != NULL){
+    string name = ptr->d_name;
+    string extension = ".txt";
+    if(name.find(extension)!=string::npos){
+      fileNames.push_back(name);
+      cout<<"Reading text file: "<<path+name<<endl;
+      ReadTextFile(path+name);
+    }
+    if(--maxFileNum<0)break;
+  }
+
+  
 }

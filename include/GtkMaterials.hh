@@ -22,11 +22,14 @@ class GtkMaterials
     G4Material* GetMaterial(const G4String);
 
     void ReadTextFile(string fileName);
- 
+    void AddPropertyToMaterial(G4Material* mat,string propertyName,string vecName1,string vecName2);
+    void ImportPorpertyFromFolder(string path);
+
   private:
  
     GtkMaterials();
     void CreateMaterials();
+    
 
   private:
 

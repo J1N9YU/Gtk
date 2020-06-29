@@ -39,6 +39,7 @@
 #include "G4VisAttributes.hh"
 #include <map>
 #include "GtkDetectorConstructionMessnger.hh"
+#include "GtktgbDetectorBuilder.hh"
 
 
 
