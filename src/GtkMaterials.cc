@@ -13,7 +13,7 @@ GtkMaterials::GtkMaterials()
 {
   fNistMan = G4NistManager::Instance();
 
-  fNistMan->SetVerbose(2);
+  fNistMan->SetVerbose(0);
 
   CreateMaterials();
   ImportPorpertyFromFolder("../Property Data/");
@@ -388,29 +388,12 @@ void GtkMaterials::ReadVecTextFile(string fileName){
     cout<<"Repeated pair name, skip this pair"<<endl;
   }
   
-
 }
 
 
 
 
-void GtkMaterials::AddPropertyToMaterial(G4Material* mat,string propertyName,string vecName1,string vecName2){
-  auto pt = mat->GetMaterialPropertiesTable();
-  if(pt == NULL){
-    pt = new G4MaterialPropertiesTable;
-    mat->SetMaterialPropertiesTable(pt);
-  }
-  
-  //Checking validity
-  if(parV.count(vecName1)==0||parV.count(vecName2)==0||parV[vecName1].size()!=parV[vecName2].size()){
-    G4cout<<"vec not found or it's size dont match"<<G4endl;
-    return;
-  }
-  
-  //Add porperty
-  pt->AddProperty(propertyName.c_str(),&parV[vecName1][0],&parV[vecName2][0],parV[vecName1].size());
 
-}
 
 
 
@@ -438,4 +421,45 @@ void GtkMaterials::ImportPorpertyFromFolder(string path){
   }
 
   
+}
+
+void GtkMaterials::AddPropertyToMaterial(string vectorPairName,string materialName,string propertyName){
+
+
+  //Checking
+  if(thePairs.count(vectorPairName)==0){
+    cout<<"Pair \""<<vectorPairName<<"\" not found"<<endl;
+    return;
+  }
+
+  G4Material* material = fNistMan->FindMaterial(materialName);
+  if(material == NULL){
+    cout<<"Material \""<<materialName<<"\" not found"<<endl;
+    return;
+  }
+
+  //Add it to material
+  auto propertyTable = material->GetMaterialPropertiesTable();
+
+  propertyTable->AddProperty(propertyName.c_str(),&thePairs[vectorPairName]);
+
+
+}
+
+void GtkMaterials::AddPropertyToMaterial(G4Material* mat,string propertyName,string vecName1,string vecName2){
+  auto pt = mat->GetMaterialPropertiesTable();
+  if(pt == NULL){
+    pt = new G4MaterialPropertiesTable;
+    mat->SetMaterialPropertiesTable(pt);
+  }
+  
+  //Checking validity
+  if(parV.count(vecName1)==0||parV.count(vecName2)==0||parV[vecName1].size()!=parV[vecName2].size()){
+    G4cout<<"vec not found or it's size dont match"<<G4endl;
+    return;
+  }
+  
+  //Add porperty
+  pt->AddProperty(propertyName.c_str(),&parV[vecName1][0],&parV[vecName2][0],parV[vecName1].size());
+
 }

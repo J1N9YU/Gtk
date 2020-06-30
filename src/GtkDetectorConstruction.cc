@@ -86,6 +86,7 @@ void GtkDetectorConstruction::ConstrcutAsciimodels(){
   cout<<"setting custom detector builder"<<endl;
   GtktgbDetectorBuilder* gtb = new GtktgbDetectorBuilder;
   volmgr->SetDetectorBuilder(gtb);
+  
   const G4tgrVolume* tgrVoltop = gtb->ReadDetector();
   physAscWorld = gtb->ConstructDetector(tgrVoltop);
 

@@ -30,6 +30,7 @@ class GtkMaterials
 
     void AddPropertyToMaterial(G4Material* mat,string propertyName,string vecName1,string vecName2);
     void ImportPorpertyFromFolder(string path);
+    void AddPropertyToMaterial(string vectorName,string materialName,string propertyName);
 
   private:
  
