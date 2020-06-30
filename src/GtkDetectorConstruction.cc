@@ -83,12 +83,14 @@ void GtkDetectorConstruction::ConstrcutAsciimodels(){
   volmgr->AddTextFile("../ascii_modles/g4geom_simple.txt");
 
   //Chose Gtk detector builder inorder to invoke Gtk LineProcessor
-  cout<<"setting custom line processor"<<endl;
+  cout<<"setting custom detector builder"<<endl;
   GtktgbDetectorBuilder* gtb = new GtktgbDetectorBuilder;
   volmgr->SetDetectorBuilder(gtb);
-  
+  const G4tgrVolume* tgrVoltop = gtb->ReadDetector();
+  physAscWorld = gtb->ConstructDetector(tgrVoltop);
 
-  physAscWorld = volmgr->ReadAndConstructDetector();
+  //Use default line processor
+  //physAscWorld = volmgr->ReadAndConstructDetector();
 }
 
 

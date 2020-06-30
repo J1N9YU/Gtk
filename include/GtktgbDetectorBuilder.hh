@@ -16,10 +16,9 @@ public:
 
     GtktgbDetectorBuilder();
     ~GtktgbDetectorBuilder();
-;
-protected:
 
     const G4tgrVolume* ReadDetector();
+    virtual G4VPhysicalVolume* ConstructDetector( const G4tgrVolume* tgrVoltop);
 
 };
 

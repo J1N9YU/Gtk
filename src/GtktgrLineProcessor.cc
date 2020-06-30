@@ -10,7 +10,7 @@ GtktgrLineProcessor::~GtktgrLineProcessor(){
     
 }
 
-G4bool GtktgrLineProcessor::ProcessLine(const std::vector<G4String> wl){
+G4bool GtktgrLineProcessor::ProcessLine(const std::vector<G4String>& wl){
     cout<<"process line starts"<<endl;
     G4bool iret = G4tgrLineProcessor::ProcessLine(wl);
     cout<<"default processing finish"<<endl;
@@ -38,5 +38,7 @@ G4bool GtktgrLineProcessor::ProcessLine(const std::vector<G4String> wl){
             cout<<endl;
         }
     }
+
+    return iret;
 
 }
