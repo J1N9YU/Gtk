@@ -1,4 +1,4 @@
-#define USE_GNERERAL_SOURCE
+//#define USE_GNERERAL_SOURCE 1
 
 #include "GtkPrimaryGeneratorAction.hh"
 
@@ -77,7 +77,7 @@ G4ThreeVector GtkPrimaryGeneratorAction::GetRandomDirection(){
   
 
   G4double theta = G4UniformRand()*2*CLHEP::pi;
-  G4double phi = (CLHEP::pi-asin(G4UniformRand()))*0.0;                               //generate phi basing on lambert light source assumption
+  G4double phi = (CLHEP::pi-asin(G4UniformRand()))*0.1;                               //generate phi basing on lambert light source assumption
   G4double x = G4UniformRand()>0.5?1:-1;
   G4double z = sin(theta)*sin(phi);
   G4double y = cos(theta)*sin(phi);
