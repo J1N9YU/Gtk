@@ -8,6 +8,7 @@
 #include "G4NistManager.hh"
 #include "GtkDetectorConstruction.hh"
 #include "G4MaterialPropertyVector.hh"
+#include "G4tgbMaterialMgr.hh"
 
 #include "map"
 #include "vector"
@@ -26,11 +27,13 @@ class GtkMaterials
     void ReadTextFile(string fileName);
 
     //x y pair vector
-    void ReadVecTextFile(string fileName);
+    void ReadPairTextFile(string fileName);
 
-    void AddPropertyToMaterial(G4Material* mat,string propertyName,string vecName1,string vecName2);
+    
     void ImportPorpertyFromFolder(string path);
-    void AddPropertyToMaterial(string vectorName,string materialName,string propertyName);
+    
+    void RegisterProperty(string vectorName,string materialName,string propertyName);
+    void AddPropertyToMaterial();
 
   private:
  
@@ -52,6 +55,11 @@ class GtkMaterials
     map<string,G4MaterialPropertyVector> thePairs;
     
     map<string,vector<G4double>> parV;
+
+    vector<vector<string>> theAddPropertyJobs;
+
+    void AddPropertyToMaterial(string vectorName,string materialName,string propertyName);
+    void AddPropertyToMaterial(G4Material* mat,string propertyName,string vecName1,string vecName2);
     
 
 };

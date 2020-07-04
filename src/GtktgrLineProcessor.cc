@@ -35,13 +35,9 @@ G4bool GtktgrLineProcessor::ProcessLine(const std::vector<G4String>& wl){
             }
 
             //Call functions in Gtkmaterial
-            GtkMaterials::GetInstance()->AddPropertyToMaterial(wlc[0],wlc[1],wlc[2]);
+            GtkMaterials::GetInstance()->RegisterProperty(wlc[0],wlc[1],wlc[2]);
             
-
             iret = 1;
-            cout<<"LineProcessor: ";
-            for(auto w:wlc)cout<<"\t"<<w;
-            cout<<endl;
         }
     }
 

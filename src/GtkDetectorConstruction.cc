@@ -39,33 +39,35 @@ GtkDetectorConstruction::GtkDetectorConstruction()
 
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+
 
 GtkDetectorConstruction::~GtkDetectorConstruction()
 { 
   delete fDCM;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+
 
 G4VPhysicalVolume* GtkDetectorConstruction::Construct()
 {    
 
-  G4cout<<"Construct() is called"<<G4endl;
-  
-  
-  //ascii-----------------------------------------------------------------
-  
   ConstrcutAsciimodels();
 
   return physAscWorld;
 
 }
 
+
+
 G4Material* GtkDetectorConstruction::FindMaterial(G4String name) {
     G4Material* material = G4Material::GetMaterial(name,true);
     return material;
 }
+
+
+
 
 void GtkDetectorConstruction::ConstructSDandField(){
   /*
@@ -76,11 +78,15 @@ void GtkDetectorConstruction::ConstructSDandField(){
 }
 
 
+
+
 void GtkDetectorConstruction::ConstrcutAsciimodels(){
 
   
   //impoty ascii modles
+  //volmgr->AddTextFile("../ascii_modles/g4geom_material.txt");
   volmgr->AddTextFile("../ascii_modles/g4geom_simple.txt");
+  
 
   //Chose Gtk detector builder inorder to invoke Gtk LineProcessor
   cout<<"setting custom detector builder"<<endl;
@@ -90,8 +96,8 @@ void GtkDetectorConstruction::ConstrcutAsciimodels(){
   const G4tgrVolume* tgrVoltop = gtb->ReadDetector();
   physAscWorld = gtb->ConstructDetector(tgrVoltop);
 
-  //Use default line processor
-  //physAscWorld = volmgr->ReadAndConstructDetector();
+  //Add properties
+  fMaterials->AddPropertyToMaterial();
 }
 
 

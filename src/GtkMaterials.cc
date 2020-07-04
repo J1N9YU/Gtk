@@ -173,7 +173,7 @@ void GtkMaterials::CreateMaterials()
   // Add entries into properties table
   G4MaterialPropertiesTable* mptGtkfiber = new G4MaterialPropertiesTable();
   mptGtkfiber->AddProperty("RINDEX",photonEnergy,refractiveIndexPMMA,nEntries);
-  mptGtkfiber->AddProperty("ABSLENGTH",photonEnergy,absGtkfiber,nEntries);
+  //mptGtkfiber->AddProperty("ABSLENGTH",photonEnergy,absGtkfiber,nEntries);
 
 
   fPMMA->SetMaterialPropertiesTable(mptGtkfiber);
@@ -349,7 +349,12 @@ void GtkMaterials::ReadTextFile(string fileName){
 
 }
 
-void GtkMaterials::ReadVecTextFile(string fileName){
+G4double Unit_Stod(string unit){
+  if(unit=="eV"){return eV; }
+  else return 1.0;
+}
+
+void GtkMaterials::ReadPairTextFile(string fileName){
     ifstream file(fileName);
   if(!file.is_open()){
     cout<<"Text not found!"<<endl;  
@@ -362,8 +367,11 @@ void GtkMaterials::ReadVecTextFile(string fileName){
   string name,xUnit,yUnit;
   ss>>name>>xUnit>>yUnit;
   getline(file,theLine);
+
+  //the x and y data
   vector<G4double> xv;
   vector<G4double> yv;
+
   while(getline(file,theLine)){
     //validation
 
@@ -371,10 +379,8 @@ void GtkMaterials::ReadVecTextFile(string fileName){
     int pos = theLine.find(' ');
     G4double x = stod(theLine.substr(0,pos));
     G4double y = stod(theLine.substr(pos+1,theLine.size()-pos-1));
-    xv.push_back(x);
-    yv.push_back(y);
-
-
+    xv.push_back(x*Unit_Stod(xUnit));
+    yv.push_back(y*Unit_Stod(yUnit));
   }
 
   G4MaterialPropertyVector pv(&xv[0],&yv[0],xv.size());
@@ -415,7 +421,7 @@ void GtkMaterials::ImportPorpertyFromFolder(string path){
     else if(name.find("vec")!=string::npos){
       fileNames.push_back(name);
       cout<<"Reading pair text file: "<<path+name<<endl;
-      ReadVecTextFile(path+name);
+      ReadPairTextFile(path+name);
     }
     if(--maxFileNum<0)break;
   }
@@ -428,20 +434,23 @@ void GtkMaterials::AddPropertyToMaterial(string vectorPairName,string materialNa
 
   //Checking
   if(thePairs.count(vectorPairName)==0){
-    cout<<"Pair \""<<vectorPairName<<"\" not found"<<endl;
+    cout<<"AddPropertyToMaterial(): Pair \""<<vectorPairName<<"\" not found"<<endl;
     return;
   }
 
-  G4Material* material = fNistMan->FindMaterial(materialName);
+  G4Material* material = G4tgbMaterialMgr::GetInstance()->FindBuiltG4Material(materialName);
   if(material == NULL){
-    cout<<"Material \""<<materialName<<"\" not found"<<endl;
+    cout<<"AddPropertyToMaterial(): Material \""<<materialName<<"\" not found"<<endl;
     return;
   }
 
   //Add it to material
   auto propertyTable = material->GetMaterialPropertiesTable();
-
+  if(propertyTable == NULL){
+    propertyTable = new G4MaterialPropertiesTable;
+  }
   propertyTable->AddProperty(propertyName.c_str(),&thePairs[vectorPairName]);
+  material->SetMaterialPropertiesTable(propertyTable);
 
 
 }
@@ -460,6 +469,25 @@ void GtkMaterials::AddPropertyToMaterial(G4Material* mat,string propertyName,str
   }
   
   //Add porperty
+  cout<<"adding"<<endl;
   pt->AddProperty(propertyName.c_str(),&parV[vecName1][0],&parV[vecName2][0],parV[vecName1].size());
 
+}
+
+
+
+void GtkMaterials::AddPropertyToMaterial(){
+  for(auto j:theAddPropertyJobs){
+    cout<<"Adding property to material:"<<j[0]+" "+j[1]+" "+j[2]<<endl;
+    AddPropertyToMaterial(j[0],j[1],j[2]);
+  }
+}
+
+
+void GtkMaterials::RegisterProperty(string vectorName,string materialName,string propertyName){
+  vector<string> temp;
+  temp.push_back(vectorName);
+  temp.push_back(materialName);
+  temp.push_back(propertyName);
+  theAddPropertyJobs.push_back(temp);
 }
