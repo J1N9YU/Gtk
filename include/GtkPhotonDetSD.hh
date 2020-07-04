@@ -3,7 +3,7 @@
 #ifndef GtkPhotonDetSD_h
 #define GtkPhotonDetSD_h 1
 
-#include "GtkPhotonDetHit.hh"
+#include "GtkHit.hh"
 
 #include "G4VSensitiveDetector.hh"
 
@@ -23,7 +23,7 @@ class GtkPhotonDetSD : public G4VSensitiveDetector
 
   private:
 
-    GtkPhotonDetHitsCollection* fPhotonDetHitCollection;
+    GtkHitsCollection* fPhotonDetHitCollection;
 };
 
 #endif

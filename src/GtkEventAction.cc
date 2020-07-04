@@ -3,7 +3,7 @@
 
 #include "G4Event.hh"
 #include "G4RunManager.hh"
-#include "GtkPhotonDetHit.hh"
+#include "GtkHit.hh"
 
 
 //Constructor
@@ -39,12 +39,12 @@ void GtkEventAction::EndOfEventAction(const G4Event* evt)
   fMPPCCollID = SDman->GetCollectionID(colName);
 
   G4HCofThisEvent* HCE = evt->GetHCofThisEvent();
-  GtkPhotonDetHitsCollection* mppcHC = 0;
+  GtkHitsCollection* mppcHC = 0;
 
   // Get the hit collections
   if (HCE)
   {
-     if (fMPPCCollID>=0) mppcHC = (GtkPhotonDetHitsCollection*)(HCE->GetHC(fMPPCCollID));
+     if (fMPPCCollID>=0) mppcHC = (GtkHitsCollection*)(HCE->GetHC(fMPPCCollID));
   }
 
   // Get hit information about photons that reached the detector in this event

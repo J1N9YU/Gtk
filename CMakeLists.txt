@@ -49,6 +49,7 @@ set(Gtk_SCRIPTS
   #run2.mac
   vis.mac
   batch.mac
+  gps.mac
   )
 
 foreach(_script ${Gtk_SCRIPTS})

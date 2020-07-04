@@ -1,6 +1,10 @@
-? How ascii construction cooperate with cpp code construction?
-? Adding optical porperties to material build by ascii file?
-- add all ascii file in a given diretory.
-- inherit G4rgbVolumeMgr to provide more disred function
+
 ? ReInitializeGeometry() or GeometryHasBeenModified() ?
-* ascii model reimport bugs
+- ascii model reimport bugs
+- building material from ascii (using tgb line processer as refernce)
+* import spectrums from ascii ( custom way )
+    - translate G4propertiesvector to material property table ( design ascii format)( maybe still using custom line processor )
+    * test the feature above
+* Clean up the code ( and git branch as well).
+
+    

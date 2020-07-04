@@ -99,6 +99,9 @@ int main(int argc,char** argv)
     // interactive mode
     UImanager->ApplyCommand("/control/execute init_vis.mac");
     UImanager->ApplyCommand("/run/numberOfThreads 1");
+#ifdef USE_GNERERAL_SOURCE
+    UImanager->ApplyCommand("/control/execute gps.mac");
+#endif
     ui->SessionStart();
     delete ui;
   }

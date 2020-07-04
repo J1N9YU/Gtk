@@ -2,7 +2,7 @@
 //
 //
 #include "GtkPhotonDetSD.hh"
-#include "GtkPhotonDetHit.hh"
+#include "GtkHit.hh"
 
 
 #include "G4Track.hh"
@@ -31,7 +31,7 @@ GtkPhotonDetSD::~GtkPhotonDetSD() { }
 void GtkPhotonDetSD::Initialize(G4HCofThisEvent* HCE)
 {
   fPhotonDetHitCollection =
-       new GtkPhotonDetHitsCollection(SensitiveDetectorName,collectionName[0]);
+       new GtkHitsCollection(SensitiveDetectorName,collectionName[0]);
   //Store collection with event and keep ID
   static G4int HCID = -1;
   if (HCID<0) HCID = GetCollectionID(0);
@@ -67,7 +67,7 @@ G4bool GtkPhotonDetSD::ProcessHits(G4Step* aStep, G4TouchableHistory* )
 
   // Creating the hit and add it to the collection
 
-  fPhotonDetHitCollection->insert(new GtkPhotonDetHit(photonExit, photonArrive, arrivalTime));
+  fPhotonDetHitCollection->insert(new GtkHit(photonExit, photonArrive, arrivalTime));
 
   return true;
 }

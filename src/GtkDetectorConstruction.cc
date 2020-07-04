@@ -1,6 +1,7 @@
 
 
 #include "GtkDetectorConstruction.hh"
+#include "GtkScintArraySD.hh"
 
 #include "G4RunManager.hh"
 #include "G4NistManager.hh"
@@ -26,59 +27,77 @@
 GtkDetectorConstruction::GtkDetectorConstruction()
 : G4VUserDetectorConstruction()
 {
-  G4cout<<"detectorconstruction constructor is called"<<G4endl;
-  fMaterials = GtkMaterials::GetInstance();
-  fDCM = new GtkDetectorConstructionMessenger(this);
-  
+  volmgr = G4tgbVolumeMgr::GetInstance();
 
+
+
+  //Material helper class
+  fMaterials = GtkMaterials::GetInstance();
+
+  //UI messager
+  fDCM = new GtkDetectorConstructionMessenger(this);
 
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+
 
 GtkDetectorConstruction::~GtkDetectorConstruction()
 { 
   delete fDCM;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+
 
 G4VPhysicalVolume* GtkDetectorConstruction::Construct()
 {    
 
-  G4cout<<"Construct() is called"<<G4endl;
-  
-  
-  //ascii-----------------------------------------------------------------
-  
   ConstrcutAsciimodels();
 
   return physAscWorld;
 
 }
 
+
+
 G4Material* GtkDetectorConstruction::FindMaterial(G4String name) {
     G4Material* material = G4Material::GetMaterial(name,true);
     return material;
 }
 
+
+
+
 void GtkDetectorConstruction::ConstructSDandField(){
   /*
-    if (!fmppcSD.Get()) {
-     G4String mppcSDName = "GeppFac/PhotonDet";
-     GtkPhotonDetSD* mppcSD = new GtkPhotonDetSD(mppcSDName);
-     G4SDManager::GetSDMpointer()->AddNewDetector(mppcSD);
-     fmppcSD.Put(mppcSD);
-  }
-  SetSensitiveDetector("SiPD_lv", fmppcSD.Get(), true);
+  auto SDArray = new GtkScintArraySD("GtkSD/Scintillator_array");
+  SetSensitiveDetector("scintlv",SDArray);
   */
+  
 }
 
 
+
+
 void GtkDetectorConstruction::ConstrcutAsciimodels(){
-  volmgr = G4tgbVolumeMgr::GetInstance();
-  volmgr->AddTextFile("../ascii_models/g4geom_simple.txt");
-  physAscWorld = volmgr->ReadAndConstructDetector();
+
+  
+  //impoty ascii modles
+  //volmgr->AddTextFile("../ascii_modles/g4geom_material.txt");
+  volmgr->AddTextFile("../ascii_modles/g4geom_simple.txt");
+  
+
+  //Chose Gtk detector builder inorder to invoke Gtk LineProcessor
+  cout<<"setting custom detector builder"<<endl;
+  GtktgbDetectorBuilder* gtb = new GtktgbDetectorBuilder;
+  volmgr->SetDetectorBuilder(gtb);
+  
+  const G4tgrVolume* tgrVoltop = gtb->ReadDetector();
+  physAscWorld = gtb->ConstructDetector(tgrVoltop);
+
+  //Add properties
+  fMaterials->AddPropertyToMaterial();
 }
 
 

@@ -1,7 +1,7 @@
 
 
-#ifndef GtkPhotonDetHit_h
-#define GtkPhotonDetHit_h 1
+#ifndef GtkHit_h
+#define GtkHit_h 1
 
 #include "G4VHit.hh"
 #include "G4THitsCollection.hh"
@@ -19,20 +19,20 @@
 class G4VTouchable;
 
 //--------------------------------------------------
-// GtkPhotonDetHit Class
+// GtkHit Class
 //--------------------------------------------------
 
-class GtkPhotonDetHit : public G4VHit
+class GtkHit : public G4VHit
 {
   public:
-    GtkPhotonDetHit();
-    GtkPhotonDetHit(G4ThreeVector pExit, G4ThreeVector pArrive, G4double pTime);
-    virtual ~GtkPhotonDetHit();
+    GtkHit();
+    GtkHit(G4ThreeVector pExit, G4ThreeVector pArrive, G4double pTime);
+    virtual ~GtkHit();
 
-    GtkPhotonDetHit(const GtkPhotonDetHit &right);
-    const GtkPhotonDetHit& operator=(const GtkPhotonDetHit& right);
+    GtkHit(const GtkHit &right);
+    const GtkHit& operator=(const GtkHit& right);
 
-    G4bool operator==(const GtkPhotonDetHit& right) const;
+    G4bool operator==(const GtkHit& right) const;
 
     inline void *operator new(size_t);
     inline void operator delete(void *aHit);
@@ -48,11 +48,8 @@ class GtkPhotonDetHit : public G4VHit
  
   private:
 
-    // the arrival time of the photon
     G4double      fArrivalTime;
-    // where the photon hit the detector (detector's coordinate)
     G4ThreeVector fPosArrive;
-    // where the photon exited the fiber (world's coordinate)
     G4ThreeVector fPosExit;
 
 };
@@ -61,24 +58,24 @@ class GtkPhotonDetHit : public G4VHit
 // Type Definitions
 //--------------------------------------------------
 
-typedef G4THitsCollection<GtkPhotonDetHit> GtkPhotonDetHitsCollection;
+typedef G4THitsCollection<GtkHit> GtkHitsCollection;
 
-extern G4ThreadLocal G4Allocator<GtkPhotonDetHit>* GtkPhotonDetHitAllocator;
+extern G4ThreadLocal G4Allocator<GtkHit>* GtkHitAllocator;
 
 //--------------------------------------------------
 // Operator Overloads
 //--------------------------------------------------
 
-inline void* GtkPhotonDetHit::operator new(size_t)
+inline void* GtkHit::operator new(size_t)
 {
-  if(!GtkPhotonDetHitAllocator)
-      GtkPhotonDetHitAllocator = new G4Allocator<GtkPhotonDetHit>;
-  return (void *) GtkPhotonDetHitAllocator->MallocSingle();
+  if(!GtkHitAllocator)
+      GtkHitAllocator = new G4Allocator<GtkHit>;
+  return (void *) GtkHitAllocator->MallocSingle();
 }
 
-inline void GtkPhotonDetHit::operator delete(void *aHit)
+inline void GtkHit::operator delete(void *aHit)
 {
-  GtkPhotonDetHitAllocator->FreeSingle((GtkPhotonDetHit*) aHit);
+  GtkHitAllocator->FreeSingle((GtkHit*) aHit);
 }
 
 #endif

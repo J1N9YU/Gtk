@@ -33,7 +33,7 @@
 #include "G4UserEventAction.hh"
 #include "globals.hh"
 #include "G4SDManager.hh"
-#include "GtkPhotonDetHit.hh"
+#include "GtkHit.hh"
 #include "MyDataAnalysisHelper.hh"
 
 class GtkRunAction;

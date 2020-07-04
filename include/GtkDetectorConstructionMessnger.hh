@@ -52,6 +52,7 @@ class GtkDetectorConstructionMessenger:public G4UImessenger{
     G4UIcmdWithoutParameter* ReInitializeGeometryCmd;
     G4UIcmdWithAString* ConstructFromFileCmd;
     G4UIcmdWithoutParameter* ClearCmd;
+    G4UIcmdWithoutParameter* TestCmd;
 
     void ConstructFromFile(std::string);
 

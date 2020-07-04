@@ -1,0 +1,34 @@
+// Define a parameter for later use
+:P POSZ 5.
+
+// Define materials
+:ELEM Hydrogen H 1. 1.
+:ELEM Oxygen O 8 16.
+:ELEM Nitrogen N 7 14.
+:MIXT air 1.214E-03 2
+      Nitrogen   0.75
+      Oxygen     0.25
+
+// Define rotation matrix
+:ROTM R00 90. 0. 90. 90. 0. 0.  // unit matrix
+
+// Define volumes and place them
+:VOLU world BOX 60. 30. 30. air
+:COLOUR world 0.9 0.9 0.9 0.2
+
+:VOLU "plastic scintillator" BOX 40. 10. 10. G4_AIR
+:PLACE "plastic scintillator" 1 world R00 0. 0. 0
+:COLOUR "plastic scintillator" 0.9 0.9 0.9 0.7
+
+:VOLU "SiPM 1" BOX 1. 2. 2. G4_WATER
+:PLACE "SiPM 1" 1 world R00 -40. 0. 0
+:COLOUR "SiPM 1" 0.9 0.1 0.1 0.9
+
+:VOLU "SiPM 2" BOX 1. 2. 2. air
+:PLACE "SiPM 2" 1 world R00 40. 0. 0
+:COLOUR "SiPM 2" 0.9 0.1 0.1 0.9
+
+//:VOLU sphere ORB 5.  G4_AIR
+//:PLACE sphere 1 "my tube" R00 0. 1. 10.
+
+:PROPERTY air_RefractiveIndex air RINDEX
