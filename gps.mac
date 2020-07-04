@@ -20,40 +20,24 @@
 /gps/pos/type Surface
 /gps/pos/shape Sphere
 /gps/pos/centre 0 0 0 
-<<<<<<< HEAD
-/gps/pos/radius 10 cm
-=======
 /gps/pos/radius 1 cm
->>>>>>> hs
 
 #angular distribution
 /gps/ang/type cos
 /gps/ang/mintheta 0  deg
 /gps/ang/maxtheta 90 deg
-<<<<<<< HEAD
-
-=======
->>>>>>> hs
 #energy distribution
 /gps/ene/type Pow
 #------------------------
 #mu- source
-<<<<<<< HEAD
-/gps/source add 1
-=======
 /gps/source/add 1
->>>>>>> hs
 /gps/particle mu-
 
 #position distribution
 /gps/pos/type Surface
 /gps/pos/shape Sphere
 /gps/pos/centre 0 0 0 
-<<<<<<< HEAD
-/gps/pos/radius 10 cm
-=======
 /gps/pos/radius 1 cm
->>>>>>> hs
 
 #angular distribution
 /gps/ang/type cos
@@ -69,7 +53,3 @@
 /event/verbose 0
 /tracking/verbose 0
 #/run/printProgress 100
-<<<<<<< HEAD
-/run/beamOn 1
-=======
->>>>>>> hs
