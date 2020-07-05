@@ -47,6 +47,7 @@
 #include "G4tgbVolumeMgr.hh" 
 #include "G4tgrRotationMatrixFactory.hh"
 #include "G4tgrVolumeMgr.hh"
+#include "GtkSDManager.hh"
 
 
 
@@ -79,7 +80,8 @@ class GtkDetectorConstruction : public G4VUserDetectorConstruction
 
     //building geometry 
     void ConstructSiPD();
-    void ConstrcutAsciimodels();
+    void ConstrcutAscii();
+    void ConstrcutAsciiSDandField();
 
 
     G4VPhysicalVolume* physAscWorld;

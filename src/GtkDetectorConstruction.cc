@@ -24,6 +24,7 @@
 #include "GtkDetectorConstructionMessnger.hh"
 
 
+
 GtkDetectorConstruction::GtkDetectorConstruction()
 : G4VUserDetectorConstruction()
 {
@@ -53,7 +54,7 @@ GtkDetectorConstruction::~GtkDetectorConstruction()
 G4VPhysicalVolume* GtkDetectorConstruction::Construct()
 {    
 
-  ConstrcutAsciimodels();
+  ConstrcutAscii();
 
   return physAscWorld;
 
@@ -70,17 +71,15 @@ G4Material* GtkDetectorConstruction::FindMaterial(G4String name) {
 
 
 void GtkDetectorConstruction::ConstructSDandField(){
-  /*
-  auto SDArray = new GtkScintArraySD("GtkSD/Scintillator_array");
-  SetSensitiveDetector("scintlv",SDArray);
-  */
+
+  GtkSDManager::GetInstance()->AssociateSDtoLogicVolume(new GtkPhotonDetSD("/mySD/photonSD"),"sipm","/mySD/photonSD");
   
 }
 
 
 
 
-void GtkDetectorConstruction::ConstrcutAsciimodels(){
+void GtkDetectorConstruction::ConstrcutAscii(){
 
   
   //impoty ascii modles
@@ -89,7 +88,6 @@ void GtkDetectorConstruction::ConstrcutAsciimodels(){
   
 
   //Chose Gtk detector builder inorder to invoke Gtk LineProcessor
-  cout<<"setting custom detector builder"<<endl;
   GtktgbDetectorBuilder* gtb = new GtktgbDetectorBuilder;
   volmgr->SetDetectorBuilder(gtb);
   
@@ -100,5 +98,7 @@ void GtkDetectorConstruction::ConstrcutAsciimodels(){
   fMaterials->AddPropertyToMaterial();
 }
 
-
+void GtkDetectorConstruction::ConstrcutAsciiSDandField(){
+  
+}
 
