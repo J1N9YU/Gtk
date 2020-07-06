@@ -62,14 +62,6 @@ G4VPhysicalVolume* GtkDetectorConstruction::Construct()
 
 
 
-G4Material* GtkDetectorConstruction::FindMaterial(G4String name) {
-    G4Material* material = G4Material::GetMaterial(name,true);
-    return material;
-}
-
-
-
-
 void GtkDetectorConstruction::ConstructSDandField(){
 
   GtkSDManager::GetInstance()->AssociateSDtoLogicVolume(new GtkPhotonDetSD("/mySD/photonSD"),"sipm","/mySD/photonSD");

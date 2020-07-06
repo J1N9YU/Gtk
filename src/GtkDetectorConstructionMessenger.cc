@@ -59,7 +59,7 @@ void GtkDetectorConstructionMessenger::SetNewValue(G4UIcommand * command,G4Strin
         //delete fDetectorConstruction->physAscWorld;
         
         //G4RunManager::GetRunManager()->ReinitializeGeometry(true);
-        fDetectorConstruction->ConstrcutAsciimodels();
+        fDetectorConstruction->ConstrcutAscii();
         G4RunManager::GetRunManager()->GeometryHasBeenModified();
         //G4UImanager::GetUIpointer()->ApplyCommand("/control/execute vis.mac");
         G4cout<<" complete!"<<G4endl;

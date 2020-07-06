@@ -75,7 +75,6 @@ class GtkDetectorConstruction : public G4VUserDetectorConstruction
     virtual G4VPhysicalVolume* Construct();
     virtual void ConstructSDandField();
 
-    G4Material* FindMaterial(G4String);
 
 
     //building geometry 

@@ -1,28 +1,6 @@
 
-<<<<<<< HEAD
-/vis/open OGL 600x600-0+0
 
-=======
 
-#
-# Use this open statement to create an OpenInventor view:
-#/vis/open OI
-#
-# Use this open statement to create a .prim file suitable for
-# viewing in DAWN:
-#/vis/open DAWNFILE
-#
-# Use this open statement to create a .heprep file suitable for
-# viewing in HepRApp:
-#/vis/open HepRepFile
-#
-# Use this open statement to create a .wrl file suitable for
-# viewing in a VRML viewer:
-#/vis/open VRML2FILE
-#
-# Disable auto refresh and quieten vis messages whilst scene and
-# trajectories are established:
->>>>>>> ac
 /vis/viewer/set/autoRefresh false
 /vis/verbose errors
 
@@ -38,10 +16,6 @@
 /vis/viewer/set/auxiliaryEdge true
 /vis/viewer/set/lineSegmentsPerCircle 100
 
-<<<<<<< HEAD
-=======
-#
->>>>>>> ac
 # Draw smooth trajectories at end of event, showing trajectory points
 # as markers 2 pixels wide:
 /vis/scene/add/trajectories smooth
@@ -90,11 +64,6 @@
 /vis/scene/add/text 6 7 10 cm 18 4 4 Shape2
 
 
-<<<<<<< HEAD
-=======
-/vis/geometry/set/colour SiPD_lv 0 0.9 0.9 0.9 1.0
-
->>>>>>> ac
 
 # To get nice view
 /vis/viewer/set/style surface
