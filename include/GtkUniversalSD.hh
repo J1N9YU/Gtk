@@ -2,7 +2,13 @@
 #define GtkUniversalSD_hh 1
 
 #include "G4VSensitiveDetector.hh"
+#include "GtkUniversalHit.hh"
+#include "G4SDManager.hh"
+#include "G4OpticalPhoton.hh"
+
 #include "string"
+#include "vector"
+#include "map"
 
 using namespace std;
 
@@ -10,7 +16,7 @@ class GtkUniversalSD:public G4VSensitiveDetector{
 
     public:
 
-    GtkUniversalSD();
+    GtkUniversalSD(const G4String &SDname);
     ~GtkUniversalSD();
 
     virtual void Initialize(G4HCofThisEvent* );
@@ -19,8 +25,8 @@ class GtkUniversalSD:public G4VSensitiveDetector{
     protected:
 
     string targetParticleName;
-    
-
+    int copyNum = 1;
+    vector<GtkUniHC*> theHCs;
     
 
 
