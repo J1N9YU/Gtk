@@ -9,6 +9,7 @@ class GtkUniversalHit:public G4VHit{
     public:
 
     GtkUniversalHit();
+    GtkUniversalHit(G4double energy,G4double arrivalTime);
     ~GtkUniversalHit();
     
     //operators
@@ -18,6 +19,9 @@ class GtkUniversalHit:public G4VHit{
     inline void operator delete(void *aHit);
 
     protected:
+
+    G4double fArrivalTime;
+    G4double fEnergy;
 
 
 };

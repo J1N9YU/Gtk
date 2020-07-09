@@ -1,9 +1,10 @@
 #include "GtkSDManager.hh"
+#include "GtkUniversalHit.hh"
+
+GtkSDManager* GtkSDManager::instance = NULL;
 
 GtkSDManager::GtkSDManager(){
-    if(instance == NULL){
-        instance = new GtkSDManager;
-    }    
+ 
 
 }
 
@@ -12,13 +13,13 @@ GtkSDManager::~GtkSDManager(){
 }
 
 GtkSDManager* GtkSDManager::GetInstance(){
-    if(instance == NULL){
+    if(!instance){
         instance = new GtkSDManager;
     }   
     return instance;
 }
 
-void GtkSDManager::AssociateSDtoLogicVolume(G4VSensitiveDetector* sd, string LVname, string name){
+void GtkSDManager::AssignSDtoLogicVolume(G4VSensitiveDetector* sd, string LVname, string name){
 
     G4SDManager* SDman = G4SDManager::GetSDMpointer();
     G4LogicalVolume* lv = G4tgbVolumeMgr::GetInstance()->FindG4LogVol("LVname");

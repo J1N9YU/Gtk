@@ -1,19 +1,10 @@
 #/run/numberOfThreads 24
-<<<<<<< HEAD
-/run/useMaximumLogicalCores
-/run/initialize
-
-#configure the mu+ and mu- source 
-#mu+ source
-/gps/source add 1.2
-=======
 #/run/useMaximumLogicalCores
 #/run/initialize
 
 #configure the mu+ and mu- source 
 #mu+ source
 /gps/source/add 1.2
->>>>>>> hs
 /gps/particle mu+
 
 #position distribution

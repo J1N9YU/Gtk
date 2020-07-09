@@ -8,20 +8,25 @@
 
 using namespace std;
 
+
+
+
 class GtkSDManager{
     public:
 
     GtkSDManager();
     ~GtkSDManager();
 
-    void RegisterSD();
-    void COnstructSD();
-    void AssociateSDtoLogicVolume(G4VSensitiveDetector* sd, string LVname, string SDname );
+    //void RegisterSD();
+    //void ConstructSD();
+    void AssignSDtoLogicVolume(G4VSensitiveDetector* sd, string LVname, string SDname );
 
     static GtkSDManager* GetInstance();
 
     protected:
 
+
+    private:
     static GtkSDManager* instance;
 
 

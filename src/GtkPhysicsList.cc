@@ -37,6 +37,11 @@ GtkPhysicsList::GtkPhysicsList() : G4VModularPhysicsList(){
     RegisterPhysics(opticalPhysics);
 }
 
+GtkPhysicsList::~GtkPhysicsList(){
+
+}
+
+
 void GtkPhysicsList::SetCuts(){
     G4VUserPhysicsList::SetCuts();
     SetCutValue(0.1*mm, "e+", "sci_reg2");

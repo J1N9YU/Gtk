@@ -64,7 +64,7 @@ G4VPhysicalVolume* GtkDetectorConstruction::Construct()
 
 void GtkDetectorConstruction::ConstructSDandField(){
 
-  GtkSDManager::GetInstance()->AssociateSDtoLogicVolume(new GtkPhotonDetSD("/mySD/photonSD"),"sipm","/mySD/photonSD");
+  GtkSDManager::GetInstance()->AssignSDtoLogicVolume(new GtkPhotonDetSD("/mySD/photonSD"),"sipm","/mySD/photonSD");
   
 }
 

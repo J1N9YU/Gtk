@@ -1,5 +1,5 @@
 #ifndef gtkPhysicsList
-#define gtkPhysicsList
+#define gtkPhysicsList 1
 
 #include "G4VModularPhysicsList.hh"
 

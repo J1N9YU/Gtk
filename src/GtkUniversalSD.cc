@@ -3,11 +3,11 @@
 
 GtkUniversalSD::GtkUniversalSD(const G4String &SDname):G4VSensitiveDetector(SDname){
 
-};
+}
 
 GtkUniversalSD::~GtkUniversalSD(){
 
-};
+}
 
 void GtkUniversalSD::Initialize(G4HCofThisEvent* HCTE){
     
@@ -25,13 +25,16 @@ G4bool GtkUniversalSD::ProcessHits(G4Step* step, G4TouchableHistory* history){
     
     auto particleDef = step->GetTrack()->GetParticleDefinition();
     int copyID = step->GetPreStepPoint()->GetTouchable()->GetCopyNumber();
+    
+    //Getting properties
     G4double energy = step->GetPreStepPoint()->GetKineticEnergy();
+    G4double arrivalTime = step->GetPreStepPoint()->GetLocalTime();
     
     //filter particle
     if(particleDef == G4OpticalPhoton::Definition()){
         
         //construct hit object, set properties
-        auto hit = new GtkUniversalHit;
+        auto hit = new GtkUniversalHit(energy,arrivalTime);
         
         //add to collection
         theHCs[copyID]->insert(hit);

@@ -5,7 +5,7 @@
 #include "GtkUniversalHit.hh"
 #include "G4SDManager.hh"
 #include "G4OpticalPhoton.hh"
-
+#include "GtkUniversalHit.hh"
 #include "string"
 #include "vector"
 #include "map"
